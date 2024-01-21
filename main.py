@@ -6,8 +6,8 @@ mult=4
 class AplicativoPixelArt:
     def __init__(self, root):
         self.root = root
-        self.root.title("Pixel Art")
-        self.root.geometry("640x300+1500+50")
+        self.root.title("Grafico")
+        self.root.geometry("640x300+50+50")
         self.canvas = tk.Canvas(root, width=750, height=540, bg="#343434")
         self.canvas.pack(expand=tk.NO, fill=tk.BOTH)
 
@@ -27,12 +27,13 @@ class AplicativoPixelArt:
         btn_gerar = tk.Button(root, text="Gerar", command=self.regerar)
         btn_gerar.place(x=560, y=45)
 
-    def desenha_proximo_pixel(self):
+    def GeraDados(self):
         if self.geracao > 0:
             self.geracao -= 1
             self.ram_a = random.randint(10, 110)
             self.resultado[self.ram_a] += 1
-            self.root.after(1, self.desenha_proximo_pixel)
+            self.root.after(1, self.GeraDados)
+            print(self.ram_a)
 
 
     def desenha_pixel(self, x, y, cor, tag=None):
@@ -63,7 +64,7 @@ class AplicativoPixelArt:
 
     def regerar(self):
         self.geracao = 1000
-        self.desenha_proximo_pixel()
+        self.GeraDados()
 
     def somar_resultado(self):
         total = sum(self.resultado)
